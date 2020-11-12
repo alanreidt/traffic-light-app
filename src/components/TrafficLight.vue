@@ -1,8 +1,8 @@
 <template>
   <div class="traffic-light">
     <div class="protector"></div>
-    <div class="protector"></div>
-    <div class="protector"></div>
+    <div class="protector protector_middle"></div>
+    <div class="protector protector_bottom"></div>
     <div class="light"></div>
     <div class="light light_yellow"></div>
     <div class="light light_green"></div>
@@ -94,11 +94,11 @@ export default defineComponent({
   z-index: -1;
 }
 
-.protector:nth-child(2) {
+.protector_middle {
   top: 142px;
 }
 
-.protector:nth-child(3) {
+.protector_bottom {
   top: 257px;
 }
 </style>
