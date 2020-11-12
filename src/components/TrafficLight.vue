@@ -20,19 +20,48 @@ export default defineComponent({
 <style scoped>
 .traffic-light {
   position: relative;
-  background: #222;
-  border-radius: 10px;
+
+  display: inline-block;
+  vertical-align: top;
   padding: 16px;
+
+  background-color: #222;
+  border-radius: 10px;
+
   box-shadow: inset 0 0 0px 5px #2a2a2a;
 }
 
+.protector {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+
+  border-right: solid 30px transparent;
+  border-left: solid 30px transparent;
+  border-top: solid 100px #191919;
+  border-radius: 11px;
+
+  z-index: -1;
+}
+
+.protector_middle {
+  top: 142px;
+}
+
+.protector_bottom {
+  top: 257px;
+}
+
 .light {
-  position: relative;
   margin: 16px;
   width: 100px;
   height: 100px;
-  border-radius: 50%;
+
   background: repeating-linear-gradient(#333, #443 5px);
+  border-radius: 50%;
+
   animation-name: lightUpRed;
   animation-duration: 4s;
   animation-iteration-count: infinite;
@@ -79,26 +108,5 @@ export default defineComponent({
     box-shadow: none;
     z-index: 0;
   }
-}
-
-.protector {
-  width: 100%;
-  position: absolute;
-  top: 25px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-right: solid 30px transparent;
-  border-left: solid 30px transparent;
-  border-top: solid 100px #191919;
-  border-radius: 11px;
-  z-index: -1;
-}
-
-.protector_middle {
-  top: 142px;
-}
-
-.protector_bottom {
-  top: 257px;
 }
 </style>
