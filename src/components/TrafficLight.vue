@@ -4,9 +4,9 @@
     <div class="protector protector_middle"></div>
     <div class="protector protector_bottom"></div>
 
-    <Light :active="activeLightIndex === 0" />
-    <Light color="yellow" :active="activeLightIndex === 1" />
-    <Light color="green" :active="activeLightIndex === 2" />
+    <Light :duration="1000" :active="activeLightIndex === 0" />
+    <Light color="yellow" :duration="3000" :active="activeLightIndex === 1" />
+    <Light color="green" :duration="15000" :active="activeLightIndex === 2" />
   </div>
 </template>
 

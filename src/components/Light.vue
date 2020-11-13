@@ -1,11 +1,16 @@
 <template>
-  <div class="light" :class="[{ light_active: active }, colorClass]"></div>
+  <div class="light" :class="[{ light_active: ticking }, colorClass]"></div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 
+const MILISECONDS_IN_A_SECOND = 1000;
+const secondsToMiliseconds = (seconds: number) =>
+  seconds * MILISECONDS_IN_A_SECOND;
+
 type Color = "red" | "yellow" | "green";
+type TimerId = number | undefined;
 
 export default defineComponent({
   name: "Light",
@@ -14,15 +19,44 @@ export default defineComponent({
       type: String as PropType<Color>,
       default: "red"
     },
+    duration: {
+      type: Number,
+      default: MILISECONDS_IN_A_SECOND
+    },
     active: {
       type: Boolean,
       default: false
     }
   },
+  data() {
+    return {
+      counter: 0,
+      timerId: undefined as TimerId,
+      ticking: this.active
+    };
+  },
   computed: {
     colorClass(): string {
       return `light_${this.color}`;
     }
+  },
+  watch: {
+    counter(seconds) {
+      const durationExceeded = secondsToMiliseconds(seconds) >= this.duration;
+
+      if (!durationExceeded) return;
+
+      clearInterval(this.timerId);
+      this.counter = 0;
+      this.ticking = false;
+    }
+  },
+  mounted() {
+    if (!this.ticking) return;
+
+    this.timerId = setInterval(() => {
+      this.counter += 1;
+    }, MILISECONDS_IN_A_SECOND);
   }
 });
 </script>
