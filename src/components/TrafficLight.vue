@@ -4,23 +4,15 @@
     <div class="protector protector_middle"></div>
     <div class="protector protector_bottom"></div>
 
-    <div
-      class="light light_red"
-      :class="{ light_active: activeLightIndex === 0 }"
-    ></div>
-    <div
-      class="light light_yellow"
-      :class="{ light_active: activeLightIndex === 1 }"
-    ></div>
-    <div
-      class="light light_green"
-      :class="{ light_active: activeLightIndex === 2 }"
-    ></div>
+    <Light :active="activeLightIndex === 0" />
+    <Light color="yellow" :active="activeLightIndex === 1" />
+    <Light color="green" :active="activeLightIndex === 2" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import Light from "./Light.vue";
 
 export default defineComponent({
   name: "TrafficLight",
@@ -39,6 +31,9 @@ export default defineComponent({
     activeLightIndex(): number {
       return this.initialLightIndex % 3;
     }
+  },
+  components: {
+    Light
   }
 });
 </script>
@@ -78,29 +73,5 @@ export default defineComponent({
 
 .protector_bottom {
   top: 257px;
-}
-
-.light {
-  width: 100px;
-  height: 100px;
-  margin: 16px;
-
-  background: repeating-linear-gradient(#333, #443 5px);
-  border-radius: 50%;
-}
-
-.light_active.light_red {
-  background: repeating-linear-gradient(#f00, #e00 5px);
-  box-shadow: 0 0 40px #f00;
-}
-
-.light_active.light_yellow {
-  background: repeating-linear-gradient(#fd0, #ec0 5px);
-  box-shadow: 0 0 40px #fd0;
-}
-
-.light_active.light_green {
-  background: repeating-linear-gradient(#0d0, #0c0 5px);
-  box-shadow: 0 0 40px #0d0;
 }
 </style>
