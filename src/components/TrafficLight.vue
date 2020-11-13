@@ -3,9 +3,19 @@
     <div class="protector"></div>
     <div class="protector protector_middle"></div>
     <div class="protector protector_bottom"></div>
-    <div class="light light_red light_active"></div>
-    <div class="light light_yellow"></div>
-    <div class="light light_green"></div>
+
+    <div
+      class="light light_red"
+      :class="{ light_active: activeLightIndex === 0 }"
+    ></div>
+    <div
+      class="light light_yellow"
+      :class="{ light_active: activeLightIndex === 1 }"
+    ></div>
+    <div
+      class="light light_green"
+      :class="{ light_active: activeLightIndex === 2 }"
+    ></div>
   </div>
 </template>
 
@@ -13,7 +23,23 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "TrafficLight"
+  name: "TrafficLight",
+  data() {
+    return {
+      initialLightIndex: 0,
+      lights: [
+        { color: "red", duration: 10000 },
+        { color: "yellow", duration: 3000 },
+        { color: "green", duration: 15000 },
+        { color: "yellow", duration: 3000 }
+      ]
+    };
+  },
+  computed: {
+    activeLightIndex(): number {
+      return this.initialLightIndex % 3;
+    }
+  }
 });
 </script>
 
