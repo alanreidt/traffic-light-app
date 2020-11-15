@@ -44,10 +44,7 @@ export default defineComponent({
   },
   methods: {
     checkIsLightActive(index: number) {
-      const isLightActive = this.activeLightIndexNormalized === index;
-      console.log(isLightActive);
-
-      return isLightActive;
+      return this.activeLightIndexNormalized === index;
     },
     incrementActiveLightIndex() {
       this.activeLightIndex += 1;
