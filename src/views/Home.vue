@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <TrafficLight :activeLight="activeLight" @duration-end="onDurationEnd" />
+    <TrafficLight
+      :activeLight="$route.params.activeLight"
+      @duration-end="onDurationEnd"
+    />
   </div>
 </template>
 
@@ -12,26 +15,10 @@ import { Color } from "../constants";
 
 export default defineComponent({
   name: "Home",
-  data() {
-    return {
-      activeLight: "red" as any
-    };
-  },
   methods: {
     onDurationEnd(activeLight: Color) {
       this.$router.push(`/${activeLight}`);
     }
-  },
-  created() {
-    const activeLight = this.$route.params.activeLight;
-    this.activeLight = activeLight;
-
-    this.$watch(
-      () => this.$route.params,
-      ({ activeLight }: any) => {
-        this.activeLight = activeLight;
-      }
-    );
   },
   components: {
     TrafficLight
