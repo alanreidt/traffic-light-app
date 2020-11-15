@@ -10,26 +10,27 @@
       :color="light.color"
       :duration="light.duration"
       :active="checkIsLightActive(index)"
-      @duration-end="incrementActiveLightIndex()"
+      @duration-end="$emit('duration-end', getColorByIndex(index + 1))"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
+
 import Light from "./Light.vue";
+import { Color } from "../constants";
 
 export default defineComponent({
   name: "TrafficLight",
   props: {
-    initialActiveLightIndex: {
-      type: Number,
-      default: 0
+    activeLight: {
+      type: String as PropType<Color>,
+      default: "red"
     }
   },
   data() {
     return {
-      activeLightIndex: this.initialActiveLightIndex,
       lights: [
         { color: "red", duration: 3000 },
         { color: "yellow", duration: 1000 },
@@ -38,16 +39,19 @@ export default defineComponent({
     };
   },
   computed: {
+    activeLightIndex(): number {
+      return this.lights.findIndex(light => light.color === this.activeLight);
+    },
     activeLightIndexNormalized(): number {
-      return this.activeLightIndex % 3;
+      return this.activeLightIndex % this.lights.length;
     }
   },
   methods: {
     checkIsLightActive(index: number) {
       return this.activeLightIndexNormalized === index;
     },
-    incrementActiveLightIndex() {
-      this.activeLightIndex += 1;
+    getColorByIndex(index: number) {
+      return this.lights[index % this.lights.length].color;
     }
   },
   components: {
