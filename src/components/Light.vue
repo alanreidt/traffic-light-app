@@ -30,7 +30,7 @@ export default defineComponent({
   },
   data() {
     return {
-      counter: 0,
+      secondsCounter: 0,
       timerId: undefined as TimerId
     };
   },
@@ -42,18 +42,18 @@ export default defineComponent({
   methods: {
     setTimer() {
       this.timerId = setInterval(() => {
-        this.counter += 1;
+        this.secondsCounter += 1;
       }, MILISECONDS_IN_A_SECOND);
     }
   },
   watch: {
-    counter(seconds) {
+    secondsCounter(seconds) {
       const durationExceeded = secondsToMiliseconds(seconds) >= this.duration;
 
       if (!durationExceeded) return;
 
       clearInterval(this.timerId);
-      this.counter = 0;
+      this.secondsCounter = 0;
       this.$emit("duration-end");
     },
     active(active) {
