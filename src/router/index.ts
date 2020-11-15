@@ -7,6 +7,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "Home",
     component: Home
   },
+  {
+    path: "/:activeLight",
+    name: "HomeWithActiveLight",
+    component: Home
+  },
 ];
 
 const router = createRouter({
