@@ -14,13 +14,24 @@ export default defineComponent({
   name: "Home",
   data() {
     return {
-      activeLight: "red"
+      activeLight: "red" as any
     };
   },
   methods: {
     onDurationEnd(activeLight: Color) {
-      this.activeLight = activeLight;
+      this.$router.push(`/${activeLight}`);
     }
+  },
+  created() {
+    const activeLight = this.$route.params.activeLight;
+    this.activeLight = activeLight;
+
+    this.$watch(
+      () => this.$route.params,
+      ({ activeLight }: any) => {
+        this.activeLight = activeLight;
+      }
+    );
   },
   components: {
     TrafficLight
