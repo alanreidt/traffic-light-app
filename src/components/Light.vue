@@ -39,6 +39,13 @@ export default defineComponent({
       return `light_${this.color}`;
     }
   },
+  methods: {
+    setTimer() {
+      this.timerId = setInterval(() => {
+        this.counter += 1;
+      }, MILISECONDS_IN_A_SECOND);
+    }
+  },
   watch: {
     counter(seconds) {
       const durationExceeded = secondsToMiliseconds(seconds) >= this.duration;
@@ -52,17 +59,13 @@ export default defineComponent({
     active(active) {
       if (!active) return;
 
-      this.timerId = setInterval(() => {
-        this.counter += 1;
-      }, MILISECONDS_IN_A_SECOND);
+      this.setTimer();
     }
   },
   mounted() {
     if (!this.active) return;
 
-    this.timerId = setInterval(() => {
-      this.counter += 1;
-    }, MILISECONDS_IN_A_SECOND);
+    this.setTimer();
   }
 });
 </script>
