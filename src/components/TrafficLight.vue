@@ -41,14 +41,11 @@ export default defineComponent({
   computed: {
     activeLightIndex(): number {
       return this.lights.findIndex(light => light.color === this.activeLight);
-    },
-    activeLightIndexNormalized(): number {
-      return this.activeLightIndex % this.lights.length;
     }
   },
   methods: {
     checkIsLightActive(index: number) {
-      return this.activeLightIndexNormalized === index;
+      return this.activeLightIndex === index;
     },
     getColorByIndex(index: number) {
       return this.lights[index % this.lights.length].color;
