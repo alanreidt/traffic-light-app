@@ -4,9 +4,14 @@
     <div class="protector protector_middle"></div>
     <div class="protector protector_bottom"></div>
 
-    <Light :duration="1000" :active="activeLightIndex === 0" />
-    <Light color="yellow" :duration="3000" :active="activeLightIndex === 1" />
-    <Light color="green" :duration="15000" :active="activeLightIndex === 2" />
+    <Light
+      v-for="(light, index) in lights"
+      :key="index"
+      :color="light.color"
+      :duration="light.duration"
+      :active="checkIsLightActive(index)"
+      @duration-end="incrementActiveLightIndex()"
+    />
   </div>
 </template>
 
@@ -16,20 +21,36 @@ import Light from "./Light.vue";
 
 export default defineComponent({
   name: "TrafficLight",
+  props: {
+    initialActiveLightIndex: {
+      type: Number,
+      default: 0
+    }
+  },
   data() {
     return {
-      initialLightIndex: 0,
+      activeLightIndex: this.initialActiveLightIndex,
       lights: [
-        { color: "red", duration: 10000 },
-        { color: "yellow", duration: 3000 },
-        { color: "green", duration: 15000 },
-        { color: "yellow", duration: 3000 }
+        { color: "red", duration: 3000 },
+        { color: "yellow", duration: 1000 },
+        { color: "green", duration: 5000 }
       ]
     };
   },
   computed: {
-    activeLightIndex(): number {
-      return this.initialLightIndex % 3;
+    activeLightIndexNormalized(): number {
+      return this.activeLightIndex % 3;
+    }
+  },
+  methods: {
+    checkIsLightActive(index: number) {
+      const isLightActive = this.activeLightIndexNormalized === index;
+      console.log(isLightActive);
+
+      return isLightActive;
+    },
+    incrementActiveLightIndex() {
+      this.activeLightIndex += 1;
     }
   },
   components: {

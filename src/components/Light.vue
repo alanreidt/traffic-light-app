@@ -1,5 +1,5 @@
 <template>
-  <div class="light" :class="[{ light_active: ticking }, colorClass]"></div>
+  <div class="light" :class="[{ light_active: active }, colorClass]"></div>
 </template>
 
 <script lang="ts">
@@ -31,8 +31,7 @@ export default defineComponent({
   data() {
     return {
       counter: 0,
-      timerId: undefined as TimerId,
-      ticking: this.active
+      timerId: undefined as TimerId
     };
   },
   computed: {
@@ -48,11 +47,18 @@ export default defineComponent({
 
       clearInterval(this.timerId);
       this.counter = 0;
-      this.ticking = false;
+      this.$emit("duration-end");
+    },
+    active(active) {
+      if (!active) return;
+
+      this.timerId = setInterval(() => {
+        this.counter += 1;
+      }, MILISECONDS_IN_A_SECOND);
     }
   },
   mounted() {
-    if (!this.ticking) return;
+    if (!this.active) return;
 
     this.timerId = setInterval(() => {
       this.counter += 1;
