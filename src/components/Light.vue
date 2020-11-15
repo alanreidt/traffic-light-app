@@ -44,6 +44,10 @@ export default defineComponent({
       this.timerId = setInterval(() => {
         this.secondsCounter += 1;
       }, MILISECONDS_IN_A_SECOND);
+    },
+    resetTimer() {
+      this.secondsCounter = 0;
+      clearInterval(this.timerId);
     }
   },
   watch: {
@@ -52,8 +56,7 @@ export default defineComponent({
 
       if (!durationExceeded) return;
 
-      clearInterval(this.timerId);
-      this.secondsCounter = 0;
+      this.resetTimer();
       this.$emit("duration-end");
     },
     active(active) {
