@@ -24,9 +24,7 @@ export default createStore({
     },
   },
   actions: {
-    changeActiveLight({ commit }: any) {
-      const activeLight = "red"; // calc active light here
-
+    changeActiveLight({ commit }: any, activeLight) {
       commit("changeActiveLight", activeLight);
     },
     startCounter({ commit }: any) {

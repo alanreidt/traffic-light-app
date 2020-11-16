@@ -10,7 +10,7 @@
       :color="light.color"
       :duration="light.duration"
       :active="checkIsLightActive(index)"
-      @duration-end="$emit('duration-end', getColorByIndex(index + 1))"
+      @duration-end="changeActiveLight(getColorByIndex(index + 1))"
     />
   </div>
 </template>
