@@ -4,9 +4,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { Color, TimerId } from "../constants";
+import { Color, TimerId, MILISECONDS_IN_A_SECOND } from "../constants";
 
-const MILISECONDS_IN_A_SECOND = 1000;
 const secondsToMiliseconds = (seconds: number) =>
   seconds * MILISECONDS_IN_A_SECOND;
 
