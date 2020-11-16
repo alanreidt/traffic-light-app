@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import { Color, TimerId, MILLISECONDS_IN_A_SECOND } from "@/constants";
+import { Color, TimerId, MILLISECONDS_IN_A_SECOND } from "@/utils/constants";
 
 export default createStore({
   state: {

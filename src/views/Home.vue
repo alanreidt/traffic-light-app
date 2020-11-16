@@ -11,7 +11,7 @@
 import { defineComponent } from "vue";
 
 import TrafficLight from "@/components/TrafficLight.vue";
-import { Color } from "../constants";
+import { Color } from "../utils/constants";
 
 export default defineComponent({
   name: "Home",

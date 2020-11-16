@@ -6,8 +6,8 @@
 import { defineComponent, PropType } from "vue";
 import { mapActions, mapState } from "vuex";
 
-import { Color, MILLISECONDS_IN_A_SECOND } from "../constants";
-import { secondsToMilliseconds } from "../helpers";
+import { Color, MILLISECONDS_IN_A_SECOND } from "../utils/constants";
+import { secondsToMilliseconds } from "../utils/helpers";
 
 export default defineComponent({
   name: "Light",

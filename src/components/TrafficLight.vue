@@ -19,7 +19,7 @@
 import { defineComponent, PropType } from "vue";
 
 import Light from "./Light.vue";
-import { Color } from "../constants";
+import { Color } from "../utils/constants";
 
 export default defineComponent({
   name: "TrafficLight",
