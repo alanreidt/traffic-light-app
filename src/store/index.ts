@@ -9,16 +9,16 @@ export default createStore({
   },
   getters: {},
   mutations: {
-    changeActiveLight({ state }: any, activeLight) {
+    changeActiveLight(state: any, activeLight) {
       state.activeLight = activeLight;
     },
-    incrementCounter({ state }: any) {
+    incrementCounter(state: any) {
       state.counter += 1;
     },
-    setTimerId({ state }: any, timerId) {
+    setTimerId(state: any, timerId: TimerId) {
       state.timerId = timerId;
     },
-    resetCounter({ state }: any) {
+    resetCounter(state: any) {
       clearInterval(state.timerId);
       state.counter = 0;
     },
