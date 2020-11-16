@@ -9,7 +9,7 @@ export default createStore({
   },
   getters: {},
   mutations: {
-    changeActiveLight(state: any, activeLight) {
+    setActiveLight(state: any, activeLight) {
       state.activeLight = activeLight;
     },
     incrementCounter(state: any) {
@@ -24,8 +24,8 @@ export default createStore({
     },
   },
   actions: {
-    changeActiveLight({ commit }: any, activeLight) {
-      commit("changeActiveLight", activeLight);
+    setActiveLight({ commit }: any, activeLight) {
+      commit("setActiveLight", activeLight);
     },
     startCounter({ commit }: any) {
       const timerId = setInterval(() => {

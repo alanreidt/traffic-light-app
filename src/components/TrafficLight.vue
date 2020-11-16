@@ -10,7 +10,7 @@
       :color="light.color"
       :duration="light.duration"
       :active="checkIsLightActive(index)"
-      @duration-end="changeActiveLight(getColorByIndex(index + 1))"
+      @duration-end="setActiveLight(getColorByIndex(index + 1))"
     />
   </div>
 </template>
@@ -45,7 +45,7 @@ export default defineComponent({
     getColorByIndex(index: number) {
       return this.lights[index % this.lights.length].color;
     },
-    ...mapActions(["changeActiveLight"])
+    ...mapActions(["setActiveLight"])
   },
   components: {
     Light
