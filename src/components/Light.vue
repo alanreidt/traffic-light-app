@@ -4,7 +4,9 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { Color, TimerId, MILLISECONDS_IN_A_SECOND } from "../constants";
+import { mapActions, mapState } from "vuex";
+
+import { Color, MILLISECONDS_IN_A_SECOND } from "../constants";
 
 const secondsToMiliseconds = (seconds: number) =>
   seconds * MILLISECONDS_IN_A_SECOND;
@@ -25,48 +27,35 @@ export default defineComponent({
       default: false
     }
   },
-  data() {
-    return {
-      secondsCounter: 0,
-      timerId: undefined as TimerId
-    };
-  },
   computed: {
     colorClass(): string {
       return `light_${this.color}`;
-    }
+    },
+    ...mapState(["counter"])
   },
   methods: {
-    startTimer() {
-      this.timerId = setInterval(() => {
-        this.secondsCounter += 1;
-      }, MILLISECONDS_IN_A_SECOND);
-    },
-    resetTimer() {
-      this.secondsCounter = 0;
-      clearInterval(this.timerId);
-    }
+    ...mapActions(["startCounter", "resetCounter"])
   },
   watch: {
-    secondsCounter(seconds) {
+    counter(seconds) {
       const durationExceeded = secondsToMiliseconds(seconds) >= this.duration;
 
       if (!durationExceeded) return;
 
-      this.resetTimer();
+      this.resetCounter();
       this.$emit("duration-end");
     },
     active(active) {
       if (!active) return;
 
-      this.resetTimer();
-      this.startTimer();
+      this.resetCounter();
+      this.startCounter();
     }
   },
   mounted() {
     if (!this.active) return;
 
-    this.startTimer();
+    this.startCounter();
   }
 });
 </script>
