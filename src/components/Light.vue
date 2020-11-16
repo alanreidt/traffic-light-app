@@ -38,7 +38,7 @@ export default defineComponent({
     counter(seconds) {
       const durationExceeded = secondsToMilliseconds(seconds) >= this.duration;
 
-      if (!durationExceeded) return;
+      if (!durationExceeded || !this.active) return;
 
       this.resetCounter();
       this.$emit("duration-end");
