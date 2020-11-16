@@ -8,7 +8,21 @@ export default createStore({
     timerId: undefined as TimerId,
   },
   getters: {},
-  mutations: {},
+  mutations: {
+    changeActiveLight({ state }: any, activeLight) {
+      state.activeLight = activeLight;
+    },
+    updateTimer({ state }: any) {
+      state.secondsCounter += 1;
+    },
+    setTimer({ state }: any, timerId) {
+      state.timerId = timerId;
+    },
+    resetTimer({ state }: any) {
+      clearInterval(state.timerId);
+      state.secondsCounter = 0;
+    },
+  },
   actions: {
     changeActiveLight({ commit }: any) {
       const activeLight = "red"; // calc active light here
