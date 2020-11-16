@@ -37,7 +37,7 @@ export default defineComponent({
     }
   },
   methods: {
-    setTimer() {
+    startTimer() {
       this.timerId = setInterval(() => {
         this.secondsCounter += 1;
       }, MILLISECONDS_IN_A_SECOND);
@@ -59,13 +59,14 @@ export default defineComponent({
     active(active) {
       if (!active) return;
 
-      this.setTimer();
+      this.resetTimer();
+      this.startTimer();
     }
   },
   mounted() {
     if (!this.active) return;
 
-    this.setTimer();
+    this.startTimer();
   }
 });
 </script>
