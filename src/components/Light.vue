@@ -4,10 +4,10 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { Color, TimerId, MILISECONDS_IN_A_SECOND } from "../constants";
+import { Color, TimerId, MILLISECONDS_IN_A_SECOND } from "../constants";
 
 const secondsToMiliseconds = (seconds: number) =>
-  seconds * MILISECONDS_IN_A_SECOND;
+  seconds * MILLISECONDS_IN_A_SECOND;
 
 export default defineComponent({
   name: "Light",
@@ -18,7 +18,7 @@ export default defineComponent({
     },
     duration: {
       type: Number,
-      default: MILISECONDS_IN_A_SECOND
+      default: MILLISECONDS_IN_A_SECOND
     },
     active: {
       type: Boolean,
@@ -40,7 +40,7 @@ export default defineComponent({
     setTimer() {
       this.timerId = setInterval(() => {
         this.secondsCounter += 1;
-      }, MILISECONDS_IN_A_SECOND);
+      }, MILLISECONDS_IN_A_SECOND);
     },
     resetTimer() {
       this.secondsCounter = 0;

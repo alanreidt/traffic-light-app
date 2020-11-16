@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import { Color, TimerId, MILISECONDS_IN_A_SECOND } from "@/constants";
+import { Color, TimerId, MILLISECONDS_IN_A_SECOND } from "@/constants";
 
 export default createStore({
   state: {
@@ -32,7 +32,7 @@ export default createStore({
     startTimer({ commit }: any) {
       const timerId = setInterval(() => {
         commit("updateTimer");
-      }, MILISECONDS_IN_A_SECOND);
+      }, MILLISECONDS_IN_A_SECOND);
 
       commit("setTimer", timerId);
     },
