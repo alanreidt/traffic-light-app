@@ -4,7 +4,7 @@ import { Color, TimerId, MILLISECONDS_IN_A_SECOND } from "@/constants";
 export default createStore({
   state: {
     activeLight: "red" as Color,
-    secondsCounter: 0,
+    counter: 0,
     timerId: undefined as TimerId,
   },
   getters: {},
@@ -12,15 +12,15 @@ export default createStore({
     changeActiveLight({ state }: any, activeLight) {
       state.activeLight = activeLight;
     },
-    updateTimer({ state }: any) {
-      state.secondsCounter += 1;
+    incrementCounter({ state }: any) {
+      state.counter += 1;
     },
-    setTimer({ state }: any, timerId) {
+    setTimerId({ state }: any, timerId) {
       state.timerId = timerId;
     },
-    resetTimer({ state }: any) {
+    resetCounter({ state }: any) {
       clearInterval(state.timerId);
-      state.secondsCounter = 0;
+      state.counter = 0;
     },
   },
   actions: {
@@ -29,15 +29,15 @@ export default createStore({
 
       commit("changeActiveLight", activeLight);
     },
-    startTimer({ commit }: any) {
+    startCounter({ commit }: any) {
       const timerId = setInterval(() => {
-        commit("updateTimer");
+        commit("incrementCounter");
       }, MILLISECONDS_IN_A_SECOND);
 
-      commit("setTimer", timerId);
+      commit("setTimerId", timerId);
     },
-    resetTimer({ commit }: any) {
-      commit("resetTimer");
+    resetCounter({ commit }: any) {
+      commit("resetCounter");
     },
   },
 });
