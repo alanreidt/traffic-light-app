@@ -4,11 +4,10 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { Color, TimerId } from "../constants";
+import { mapActions, mapState } from "vuex";
 
-const MILISECONDS_IN_A_SECOND = 1000;
-const secondsToMiliseconds = (seconds: number) =>
-  seconds * MILISECONDS_IN_A_SECOND;
+import { Color, MILLISECONDS_IN_A_SECOND } from "../utils/constants";
+import { secondsToMilliseconds } from "../utils/helpers";
 
 export default defineComponent({
   name: "Light",
@@ -19,54 +18,42 @@ export default defineComponent({
     },
     duration: {
       type: Number,
-      default: MILISECONDS_IN_A_SECOND
+      default: MILLISECONDS_IN_A_SECOND
     },
     active: {
       type: Boolean,
       default: false
     }
   },
-  data() {
-    return {
-      secondsCounter: 0,
-      timerId: undefined as TimerId
-    };
-  },
   computed: {
     colorClass(): string {
       return `light_${this.color}`;
-    }
+    },
+    ...mapState(["counter"])
   },
   methods: {
-    setTimer() {
-      this.timerId = setInterval(() => {
-        this.secondsCounter += 1;
-      }, MILISECONDS_IN_A_SECOND);
-    },
-    resetTimer() {
-      this.secondsCounter = 0;
-      clearInterval(this.timerId);
-    }
+    ...mapActions(["startCounter", "resetCounter"])
   },
   watch: {
-    secondsCounter(seconds) {
-      const durationExceeded = secondsToMiliseconds(seconds) >= this.duration;
+    counter(seconds) {
+      const durationExceeded = secondsToMilliseconds(seconds) >= this.duration;
 
-      if (!durationExceeded) return;
+      if (!durationExceeded || !this.active) return;
 
-      this.resetTimer();
+      this.resetCounter();
       this.$emit("duration-end");
     },
     active(active) {
       if (!active) return;
 
-      this.setTimer();
+      this.resetCounter();
+      this.startCounter();
     }
   },
   mounted() {
     if (!this.active) return;
 
-    this.setTimer();
+    this.startCounter();
   }
 });
 </script>
