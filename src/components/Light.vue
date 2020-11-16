@@ -7,7 +7,7 @@ import { defineComponent, PropType } from "vue";
 import { mapActions, mapState } from "vuex";
 
 import { Color, MILLISECONDS_IN_A_SECOND } from "../constants";
-import { secondsToMiliseconds } from "../helpers";
+import { secondsToMilliseconds } from "../helpers";
 
 export default defineComponent({
   name: "Light",
@@ -36,7 +36,7 @@ export default defineComponent({
   },
   watch: {
     counter(seconds) {
-      const durationExceeded = secondsToMiliseconds(seconds) >= this.duration;
+      const durationExceeded = secondsToMilliseconds(seconds) >= this.duration;
 
       if (!durationExceeded) return;
 
