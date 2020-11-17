@@ -7,10 +7,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { mapActions, mapState } from "vuex";
 
-import { LightType, MILLISECONDS_IN_A_SECOND } from "../utils/constants";
-import { secondsToMilliseconds } from "../utils/helpers";
+import { LightType } from "../utils/constants";
 
 export default defineComponent({
   name: "TrafficSignalLight",
@@ -18,10 +16,6 @@ export default defineComponent({
     type: {
       type: String as PropType<LightType>,
       default: "red"
-    },
-    duration: {
-      type: Number,
-      default: MILLISECONDS_IN_A_SECOND
     },
     active: {
       type: Boolean,
@@ -31,35 +25,7 @@ export default defineComponent({
   computed: {
     typeClass(): string {
       return `traffic-signal__light_${this.type}`;
-    },
-    ...mapState(["counter"])
-  },
-  methods: {
-    ...mapActions(["startCounter", "resetCounter"])
-  },
-  watch: {
-    counter(seconds) {
-      const durationExceeded = secondsToMilliseconds(seconds) >= this.duration;
-
-      if (!durationExceeded || !this.active) return;
-
-      this.resetCounter();
-      this.$emit("duration-end");
-    },
-    active(active) {
-      if (!active) return;
-
-      this.resetCounter();
-      this.startCounter();
     }
-  },
-  mounted() {
-    if (!this.active) return;
-
-    this.startCounter();
-  },
-  unmounted() {
-    this.resetCounter();
   }
 });
 </script>

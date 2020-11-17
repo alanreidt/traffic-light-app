@@ -8,12 +8,14 @@
       v-for="(light, index) in lights"
       :key="index"
       :type="light.type"
-      :duration="light.duration"
       :active="checkIsLightActive(index)"
-      @duration-end="setActiveLight(calcNextActiveLight())"
     />
 
-    <TrafficSignalCounter v-show="!isActiveLightYellow" />
+    <TrafficSignalCounter
+      v-show="!isActiveLightYellow"
+      :duration="activeLightDuration"
+      @duration-end="setActiveLight(calcNextActiveLight())"
+    />
   </div>
 </template>
 
@@ -39,6 +41,9 @@ export default defineComponent({
   computed: {
     activeLightIndex(): number {
       return this.lights.findIndex(light => light.type === this.activeLight);
+    },
+    activeLightDuration(): number {
+      return this.lights[this.activeLightIndex].duration;
     },
     isActiveLightYellow(): boolean {
       return this.activeLight === "yellow";

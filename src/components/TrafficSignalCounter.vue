@@ -4,12 +4,47 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
+
+import { MILLISECONDS_IN_A_SECOND } from "../utils/constants";
+import { secondsToMilliseconds } from "../utils/helpers";
 
 export default defineComponent({
-  name: "TrafficSignalLight",
+  name: "TrafficSignalCounter",
+  props: {
+    duration: {
+      type: Number,
+      default: MILLISECONDS_IN_A_SECOND
+    }
+  },
   computed: {
     ...mapState(["counter"])
+  },
+  methods: {
+    ...mapActions(["startCounter", "resetCounter"])
+  },
+  watch: {
+    counter(seconds) {
+      const durationExceeded = secondsToMilliseconds(seconds) >= this.duration;
+
+      if (!durationExceeded) return;
+
+      this.resetCounter();
+      this.$emit("duration-end");
+    },
+    duration() {
+      // handles the case, when the active light was changed
+      // by the route and the previous timer hasn't been reset
+      this.resetCounter();
+
+      this.startCounter();
+    }
+  },
+  mounted() {
+    this.startCounter();
+  },
+  unmounted() {
+    this.resetCounter();
   }
 });
 </script>
