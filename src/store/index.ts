@@ -10,7 +10,7 @@ export default createStore({
   getters: {},
   mutations: {
     setActiveLight(state, activeLight) {
-      state.activeLight = activeLight;
+      state.activeLight = activeLight || "red";
     },
     incrementCounter(state) {
       state.counter += 1;
