@@ -8,11 +8,11 @@
       v-for="(light, index) in lights"
       :key="index"
       :type="light.type"
-      :active="checkIsLightActive(index)"
+      :active="checkIsLightActiveByIndex(index)"
     />
 
     <TrafficSignalCounter
-      v-show="!isActiveLightYellow"
+      v-show="!checkIsLightActiveByType(LightTypes.YELLOW)"
       :duration="activeLightDuration"
       @duration-end="$emit('duration-end', calcNextActiveLight())"
     />
@@ -24,23 +24,24 @@ import { defineComponent, PropType } from "vue";
 
 import TrafficSignalLight from "./TrafficSignalLight.vue";
 import TrafficSignalCounter from "./TrafficSignalCounter.vue";
-import { LightType } from "../utils/constants";
+import { DEFAULT_LIGHT_TYPE, LightType, LightTypes } from "../utils/constants";
 
 export default defineComponent({
   name: "TrafficSignal",
   props: {
     activeLight: {
       type: String as PropType<LightType>,
-      default: "red"
+      default: DEFAULT_LIGHT_TYPE
     }
   },
   data() {
     return {
       prevActiveLightIndex: 0,
+      LightTypes,
       lights: [
-        { type: "red", duration: 10000 },
-        { type: "yellow", duration: 3000 },
-        { type: "green", duration: 15000 }
+        { type: LightTypes.RED, duration: 10000 },
+        { type: LightTypes.YELLOW, duration: 3000 },
+        { type: LightTypes.GREEN, duration: 15000 }
       ]
     };
   },
@@ -50,14 +51,14 @@ export default defineComponent({
     },
     activeLightDuration(): number {
       return this.lights[this.activeLightIndex].duration;
-    },
-    isActiveLightYellow(): boolean {
-      return this.activeLight === "yellow";
     }
   },
   methods: {
-    checkIsLightActive(index: number) {
+    checkIsLightActiveByIndex(index: number) {
       return this.activeLightIndex === index;
+    },
+    checkIsLightActiveByType(type: LightType) {
+      return this.activeLight === type;
     },
     getNextActiveLightbyIndex(index: number) {
       return this.lights[index].type;
@@ -65,15 +66,15 @@ export default defineComponent({
     calcNextActiveLight() {
       let nextActiveLightIndex = this.activeLightIndex;
 
-      if (this.activeLight === "red") {
+      if (this.checkIsLightActiveByType(LightTypes.RED)) {
         nextActiveLightIndex = this.activeLightIndex + 1;
       }
 
-      if (this.activeLight === "green") {
+      if (this.checkIsLightActiveByType(LightTypes.GREEN)) {
         nextActiveLightIndex = this.activeLightIndex - 1;
       }
 
-      if (this.isActiveLightYellow) {
+      if (this.checkIsLightActiveByType(LightTypes.YELLOW)) {
         nextActiveLightIndex =
           this.prevActiveLightIndex === 0
             ? this.activeLightIndex + 1

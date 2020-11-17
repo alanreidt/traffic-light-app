@@ -8,14 +8,14 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 
-import { LightType } from "../utils/constants";
+import { DEFAULT_LIGHT_TYPE, LightType } from "../utils/constants";
 
 export default defineComponent({
   name: "TrafficSignalLight",
   props: {
     type: {
       type: String as PropType<LightType>,
-      default: "red"
+      default: DEFAULT_LIGHT_TYPE
     },
     active: {
       type: Boolean,
