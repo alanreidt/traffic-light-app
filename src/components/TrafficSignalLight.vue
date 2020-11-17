@@ -10,7 +10,7 @@ import { Color, MILLISECONDS_IN_A_SECOND } from "../utils/constants";
 import { secondsToMilliseconds } from "../utils/helpers";
 
 export default defineComponent({
-  name: "Light",
+  name: "TrafficSignalLight",
   props: {
     type: {
       type: String as PropType<Color>,
