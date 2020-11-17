@@ -1,5 +1,5 @@
 <template>
-  <span class="traffic-signal__counter">{{ counter }}</span>
+  <span class="traffic-signal__counter">{{ counterReversed }}</span>
 </template>
 
 <script lang="ts">
@@ -7,7 +7,7 @@ import { defineComponent } from "vue";
 import { mapActions, mapState } from "vuex";
 
 import { MILLISECONDS_IN_A_SECOND } from "../utils/constants";
-import { secondsToMilliseconds } from "../utils/helpers";
+import { secondsToMilliseconds, millisecondsToSeconds } from "../utils/helpers";
 
 export default defineComponent({
   name: "TrafficSignalCounter",
@@ -18,6 +18,9 @@ export default defineComponent({
     }
   },
   computed: {
+    counterReversed(): number {
+      return millisecondsToSeconds(this.duration) - this.counter;
+    },
     ...mapState(["counter"])
   },
   methods: {
