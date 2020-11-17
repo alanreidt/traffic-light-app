@@ -1,29 +1,27 @@
 # traffic-signal-app
+Эмулятор светофора, работающий через роутинг.
 
-## Project setup
-```
+[Demo-page](https://traffic-signal-app.vercel.app)
+
+## Быстрый старт
+Для клонирования репозитория, используйте следующие команды:
+```bash
+# clone the repo into the alanreidt-traffic-signal-app folder
+git clone https://github.com/alanreidt/traffic-signal-app.git alanreidt-traffic-signal-app
+
+cd alanreidt-traffic-signal-app
+
+# install the repo dependencies
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
+Доступные команды:
+```bash
+# to build the dev version and open it in a browser
 npm run start
-```
 
-### Compiles and minifies for production
-```
+# to build the production version into dist folder
 npm run build
 ```
 
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Страница доступна по адресу http://localhost:8080/.
