@@ -1,17 +1,13 @@
 import { createStore } from "vuex";
-import { LightType, TimerId, MILLISECONDS_IN_A_SECOND } from "@/utils/constants";
+import { TimerId, MILLISECONDS_IN_A_SECOND } from "@/utils/constants";
 
 export default createStore({
   state: {
-    activeLight: "red" as LightType,
     counter: 0,
     timerId: undefined as TimerId,
   },
   getters: {},
   mutations: {
-    setActiveLight(state, activeLight) {
-      state.activeLight = activeLight || "red";
-    },
     incrementCounter(state) {
       state.counter += 1;
     },
@@ -24,9 +20,6 @@ export default createStore({
     },
   },
   actions: {
-    setActiveLight({ commit }, activeLight) {
-      commit("setActiveLight", activeLight);
-    },
     startCounter({ commit }) {
       const timerId = setInterval(() => {
         commit("incrementCounter");
