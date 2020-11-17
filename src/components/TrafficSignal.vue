@@ -55,15 +55,15 @@ export default defineComponent({
     calcNextActiveLight() {
       let nextActiveLightIndex = this.activeLightIndex;
 
-      if (this.activeLightIndex === 0) {
+      if (this.activeLight === "red") {
         nextActiveLightIndex = this.activeLightIndex + 1;
       }
 
-      if (this.activeLightIndex === 2) {
+      if (this.activeLight === "green") {
         nextActiveLightIndex = this.activeLightIndex - 1;
       }
 
-      if (this.activeLightIndex === 1) {
+      if (this.isActiveLightYellow) {
         nextActiveLightIndex =
           this.prevActiveLightIndex === 0
             ? this.activeLightIndex + 1
