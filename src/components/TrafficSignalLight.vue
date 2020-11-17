@@ -54,6 +54,9 @@ export default defineComponent({
     if (!this.active) return;
 
     this.startCounter();
+  },
+  unmounted() {
+    this.resetCounter();
   }
 });
 </script>
