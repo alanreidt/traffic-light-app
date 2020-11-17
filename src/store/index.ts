@@ -9,32 +9,32 @@ export default createStore({
   },
   getters: {},
   mutations: {
-    setActiveLight(state: any, activeLight) {
+    setActiveLight(state, activeLight) {
       state.activeLight = activeLight;
     },
-    incrementCounter(state: any) {
+    incrementCounter(state) {
       state.counter += 1;
     },
-    setTimerId(state: any, timerId: TimerId) {
+    setTimerId(state, timerId: TimerId) {
       state.timerId = timerId;
     },
-    resetCounter(state: any) {
+    resetCounter(state) {
       clearInterval(state.timerId);
       state.counter = 0;
     },
   },
   actions: {
-    setActiveLight({ commit }: any, activeLight) {
+    setActiveLight({ commit }, activeLight) {
       commit("setActiveLight", activeLight);
     },
-    startCounter({ commit }: any) {
+    startCounter({ commit }) {
       const timerId = setInterval(() => {
         commit("incrementCounter");
       }, MILLISECONDS_IN_A_SECOND);
 
       commit("setTimerId", timerId);
     },
-    resetCounter({ commit }: any) {
+    resetCounter({ commit }) {
       commit("resetCounter");
     },
   },
