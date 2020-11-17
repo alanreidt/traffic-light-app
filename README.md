@@ -3,6 +3,8 @@
 
 [Demo-page](https://traffic-signal-app.vercel.app)
 
+Дизайн приложения взят из (Josh Werner's)[https://codepen.io/jshwrnr] (Traffic Light codepen)[https://codepen.io/jshwrnr/pen/jOqdvjr], с указанием (копирайта)[./_miscellaneous/traffic_light_copyright.txt].
+
 ## Быстрый старт
 Для клонирования репозитория, используйте следующие команды:
 ```bash
