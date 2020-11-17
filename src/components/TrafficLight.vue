@@ -7,7 +7,7 @@
     <Light
       v-for="(light, index) in lights"
       :key="index"
-      :color="light.color"
+      :type="light.type"
       :duration="light.duration"
       :active="checkIsLightActive(index)"
       @duration-end="setActiveLight(calcNextActiveLight())"
@@ -27,15 +27,15 @@ export default defineComponent({
     return {
       prevActiveLightIndex: 0,
       lights: [
-        { color: "red", duration: 3000 },
-        { color: "yellow", duration: 1000 },
-        { color: "green", duration: 5000 }
+        { type: "red", duration: 3000 },
+        { type: "yellow", duration: 1000 },
+        { type: "green", duration: 5000 }
       ]
     };
   },
   computed: {
     activeLightIndex(): number {
-      return this.lights.findIndex(light => light.color === this.activeLight);
+      return this.lights.findIndex(light => light.type === this.activeLight);
     },
     ...mapState(["activeLight"])
   },
@@ -44,7 +44,7 @@ export default defineComponent({
       return this.activeLightIndex === index;
     },
     getNextActiveLightbyIndex(index: number) {
-      return this.lights[index].color;
+      return this.lights[index].type;
     },
     calcNextActiveLight() {
       let nextActiveLightIndex = this.activeLightIndex + 1;

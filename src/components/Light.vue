@@ -1,5 +1,5 @@
 <template>
-  <div class="light" :class="[{ light_active: active }, colorClass]"></div>
+  <div class="light" :class="[{ light_active: active }, typeClass]"></div>
 </template>
 
 <script lang="ts">
@@ -12,7 +12,7 @@ import { secondsToMilliseconds } from "../utils/helpers";
 export default defineComponent({
   name: "Light",
   props: {
-    color: {
+    type: {
       type: String as PropType<Color>,
       default: "red"
     },
@@ -26,8 +26,8 @@ export default defineComponent({
     }
   },
   computed: {
-    colorClass(): string {
-      return `light_${this.color}`;
+    typeClass(): string {
+      return `light_${this.type}`;
     },
     ...mapState(["counter"])
   },
