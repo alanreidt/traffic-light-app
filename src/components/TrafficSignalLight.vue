@@ -1,5 +1,8 @@
 <template>
-  <div class="light" :class="[{ light_active: active }, typeClass]"></div>
+  <div
+    class="traffic-signal__light"
+    :class="[{ 'traffic-signal__light_active': active }, typeClass]"
+  ></div>
 </template>
 
 <script lang="ts">
@@ -27,7 +30,7 @@ export default defineComponent({
   },
   computed: {
     typeClass(): string {
-      return `light_${this.type}`;
+      return `traffic-signal__light_${this.type}`;
     },
     ...mapState(["counter"])
   },
@@ -62,7 +65,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.light {
+.traffic-signal__light {
   width: 100px;
   height: 100px;
   margin: 16px;
@@ -71,17 +74,17 @@ export default defineComponent({
   border-radius: 50%;
 }
 
-.light_active.light_red {
+.traffic-signal__light_active.traffic-signal__light_red {
   background: repeating-linear-gradient(#f00, #e00 5px);
   box-shadow: 0 0 40px #f00;
 }
 
-.light_active.light_yellow {
+.traffic-signal__light_active.traffic-signal__light_yellow {
   background: repeating-linear-gradient(#fd0, #ec0 5px);
   box-shadow: 0 0 40px #fd0;
 }
 
-.light_active.light_green {
+.traffic-signal__light_active.traffic-signal__light_green {
   background: repeating-linear-gradient(#0d0, #0c0 5px);
   box-shadow: 0 0 40px #0d0;
 }
