@@ -36,22 +36,32 @@ export default defineComponent({
   height: 100px;
   margin: 16px;
 
-  background: repeating-linear-gradient(#333, #443 5px);
+  opacity: 0.15;
+  background-color: #f00;
   border-radius: 50%;
 }
 
+.traffic-signal__light_yellow {
+  background-color: #fd0;
+}
+
+.traffic-signal__light_green {
+  background-color: #0d0;
+}
+
+.traffic-signal__light_active {
+  opacity: 1;
+}
+
 .traffic-signal__light_active.traffic-signal__light_red {
-  background: repeating-linear-gradient(#f00, #e00 5px);
   box-shadow: 0 0 40px #f00;
 }
 
 .traffic-signal__light_active.traffic-signal__light_yellow {
-  background: repeating-linear-gradient(#fd0, #ec0 5px);
   box-shadow: 0 0 40px #fd0;
 }
 
 .traffic-signal__light_active.traffic-signal__light_green {
-  background: repeating-linear-gradient(#0d0, #0c0 5px);
   box-shadow: 0 0 40px #0d0;
 }
 </style>
