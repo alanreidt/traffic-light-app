@@ -47,7 +47,11 @@ export default defineComponent({
       return this.lights[index].type;
     },
     calcNextActiveLight() {
-      let nextActiveLightIndex = this.activeLightIndex + 1;
+      let nextActiveLightIndex = this.activeLightIndex;
+
+      if (this.activeLightIndex === 0) {
+        nextActiveLightIndex = this.activeLightIndex + 1;
+      }
 
       if (this.activeLightIndex === 2) {
         nextActiveLightIndex = this.activeLightIndex - 1;
