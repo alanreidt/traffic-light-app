@@ -10,7 +10,7 @@
       :color="light.color"
       :duration="light.duration"
       :active="checkIsLightActive(index)"
-      @duration-end="setActiveLight(getColorByIndex(index + 1))"
+      @duration-end="setActiveLight(calcNextActiveLight())"
     />
   </div>
 </template>
@@ -25,6 +25,7 @@ export default defineComponent({
   name: "TrafficLight",
   data() {
     return {
+      prevActiveLightIndex: 0,
       lights: [
         { color: "red", duration: 3000 },
         { color: "yellow", duration: 1000 },
@@ -42,8 +43,27 @@ export default defineComponent({
     checkIsLightActive(index: number) {
       return this.activeLightIndex === index;
     },
-    getColorByIndex(index: number) {
-      return this.lights[index % this.lights.length].color;
+    calcNextActiveLight() {
+      let nextActiveLightIndex = this.activeLightIndex;
+
+      if (this.activeLightIndex === 0) {
+        nextActiveLightIndex = this.activeLightIndex + 1;
+      }
+
+      if (this.activeLightIndex === 2) {
+        nextActiveLightIndex = this.activeLightIndex - 1;
+      }
+
+      if (this.activeLightIndex === 1) {
+        nextActiveLightIndex =
+          this.prevActiveLightIndex === 0
+            ? this.activeLightIndex + 1
+            : this.activeLightIndex - 1;
+      }
+
+      this.prevActiveLightIndex = this.activeLightIndex;
+
+      return this.lights[nextActiveLightIndex].color;
     },
     ...mapActions(["setActiveLight"])
   },
