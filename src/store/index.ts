@@ -1,9 +1,9 @@
 import { createStore } from "vuex";
-import { Color, TimerId, MILLISECONDS_IN_A_SECOND } from "@/utils/constants";
+import { LightType, TimerId, MILLISECONDS_IN_A_SECOND } from "@/utils/constants";
 
 export default createStore({
   state: {
-    activeLight: "red" as Color,
+    activeLight: "red" as LightType,
     counter: 0,
     timerId: undefined as TimerId,
   },

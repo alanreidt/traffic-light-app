@@ -6,14 +6,14 @@
 import { defineComponent, PropType } from "vue";
 import { mapActions, mapState } from "vuex";
 
-import { Color, MILLISECONDS_IN_A_SECOND } from "../utils/constants";
+import { LightType, MILLISECONDS_IN_A_SECOND } from "../utils/constants";
 import { secondsToMilliseconds } from "../utils/helpers";
 
 export default defineComponent({
   name: "TrafficSignalLight",
   props: {
     type: {
-      type: String as PropType<Color>,
+      type: String as PropType<LightType>,
       default: "red"
     },
     duration: {
