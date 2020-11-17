@@ -8,11 +8,11 @@
       v-for="(light, index) in lights"
       :key="index"
       :type="light.type"
-      :active="checkIsLightActive(index)"
+      :active="checkIsLightActiveByIndex(index)"
     />
 
     <TrafficSignalCounter
-      v-show="!isActiveLightYellow"
+      v-show="!checkIsLightActiveByType(LightTypes.YELLOW)"
       :duration="activeLightDuration"
       @duration-end="$emit('duration-end', calcNextActiveLight())"
     />
@@ -37,6 +37,7 @@ export default defineComponent({
   data() {
     return {
       prevActiveLightIndex: 0,
+      LightTypes,
       lights: [
         { type: LightTypes.RED, duration: 10000 },
         { type: LightTypes.YELLOW, duration: 3000 },
@@ -50,14 +51,14 @@ export default defineComponent({
     },
     activeLightDuration(): number {
       return this.lights[this.activeLightIndex].duration;
-    },
-    isActiveLightYellow(): boolean {
-      return this.activeLight === LightTypes.YELLOW;
     }
   },
   methods: {
-    checkIsLightActive(index: number) {
+    checkIsLightActiveByIndex(index: number) {
       return this.activeLightIndex === index;
+    },
+    checkIsLightActiveByType(type: LightType) {
+      return this.activeLight === type;
     },
     getNextActiveLightbyIndex(index: number) {
       return this.lights[index].type;
@@ -65,15 +66,15 @@ export default defineComponent({
     calcNextActiveLight() {
       let nextActiveLightIndex = this.activeLightIndex;
 
-      if (this.activeLight === LightTypes.RED) {
+      if (this.checkIsLightActiveByType(LightTypes.RED)) {
         nextActiveLightIndex = this.activeLightIndex + 1;
       }
 
-      if (this.activeLight === LightTypes.GREEN) {
+      if (this.checkIsLightActiveByType(LightTypes.GREEN)) {
         nextActiveLightIndex = this.activeLightIndex - 1;
       }
 
-      if (this.isActiveLightYellow) {
+      if (this.checkIsLightActiveByType(LightTypes.YELLOW)) {
         nextActiveLightIndex =
           this.prevActiveLightIndex === 0
             ? this.activeLightIndex + 1
