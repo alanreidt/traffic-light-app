@@ -43,12 +43,11 @@ export default defineComponent({
     checkIsLightActive(index: number) {
       return this.activeLightIndex === index;
     },
+    getNextActiveLightbyIndex(index: number) {
+      return this.lights[index].color;
+    },
     calcNextActiveLight() {
-      let nextActiveLightIndex = this.activeLightIndex;
-
-      if (this.activeLightIndex === 0) {
-        nextActiveLightIndex = this.activeLightIndex + 1;
-      }
+      let nextActiveLightIndex = this.activeLightIndex + 1;
 
       if (this.activeLightIndex === 2) {
         nextActiveLightIndex = this.activeLightIndex - 1;
@@ -63,7 +62,7 @@ export default defineComponent({
 
       this.prevActiveLightIndex = this.activeLightIndex;
 
-      return this.lights[nextActiveLightIndex].color;
+      return this.getNextActiveLightbyIndex(nextActiveLightIndex);
     },
     ...mapActions(["setActiveLight"])
   },
