@@ -24,23 +24,23 @@ import { defineComponent, PropType } from "vue";
 
 import TrafficSignalLight from "./TrafficSignalLight.vue";
 import TrafficSignalCounter from "./TrafficSignalCounter.vue";
-import { LightType } from "../utils/constants";
+import { DEFAULT_LIGHT_TYPE, LightType, LightTypes } from "../utils/constants";
 
 export default defineComponent({
   name: "TrafficSignal",
   props: {
     activeLight: {
       type: String as PropType<LightType>,
-      default: "red"
+      default: DEFAULT_LIGHT_TYPE
     }
   },
   data() {
     return {
       prevActiveLightIndex: 0,
       lights: [
-        { type: "red", duration: 10000 },
-        { type: "yellow", duration: 3000 },
-        { type: "green", duration: 15000 }
+        { type: LightTypes.RED, duration: 10000 },
+        { type: LightTypes.YELLOW, duration: 3000 },
+        { type: LightTypes.GREEN, duration: 15000 }
       ]
     };
   },
@@ -52,7 +52,7 @@ export default defineComponent({
       return this.lights[this.activeLightIndex].duration;
     },
     isActiveLightYellow(): boolean {
-      return this.activeLight === "yellow";
+      return this.activeLight === LightTypes.YELLOW;
     }
   },
   methods: {
@@ -65,11 +65,11 @@ export default defineComponent({
     calcNextActiveLight() {
       let nextActiveLightIndex = this.activeLightIndex;
 
-      if (this.activeLight === "red") {
+      if (this.activeLight === LightTypes.RED) {
         nextActiveLightIndex = this.activeLightIndex + 1;
       }
 
-      if (this.activeLight === "green") {
+      if (this.activeLight === LightTypes.GREEN) {
         nextActiveLightIndex = this.activeLightIndex - 1;
       }
 
