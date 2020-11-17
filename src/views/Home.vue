@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <TrafficLight />
+    <TrafficSignal />
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "vuex";
 
-import TrafficLight from "@/components/TrafficLight.vue";
+import TrafficSignal from "@/components/TrafficSignal.vue";
 
 export default defineComponent({
   name: "Home",
@@ -29,7 +29,7 @@ export default defineComponent({
     this.setActiveLight(activeLight);
   },
   components: {
-    TrafficLight
+    TrafficSignal
   }
 });
 </script>

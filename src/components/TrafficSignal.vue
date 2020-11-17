@@ -4,7 +4,7 @@
     <div class="protector protector_middle"></div>
     <div class="protector protector_bottom"></div>
 
-    <Light
+    <TrafficSignalLight
       v-for="(light, index) in lights"
       :key="index"
       :type="light.type"
@@ -19,10 +19,10 @@
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "vuex";
 
-import Light from "./Light.vue";
+import TrafficSignalLight from "./TrafficSignalLight.vue";
 
 export default defineComponent({
-  name: "TrafficLight",
+  name: "TrafficSignal",
   data() {
     return {
       prevActiveLightIndex: 0,
@@ -67,7 +67,7 @@ export default defineComponent({
     ...mapActions(["setActiveLight"])
   },
   components: {
-    Light
+    TrafficSignalLight
   }
 });
 </script>

@@ -1,4 +1,4 @@
-# traffic-light-app
+# traffic-signal-app
 
 ## Project setup
 ```
