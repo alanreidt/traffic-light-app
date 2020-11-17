@@ -22,7 +22,7 @@ import { mapActions, mapState } from "vuex";
 import TrafficSignalLight from "./TrafficSignalLight.vue";
 
 export default defineComponent({
-  name: "TrafficLight",
+  name: "TrafficSignal",
   data() {
     return {
       prevActiveLightIndex: 0,
