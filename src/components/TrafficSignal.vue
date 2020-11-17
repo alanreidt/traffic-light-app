@@ -14,27 +14,33 @@
     <TrafficSignalCounter
       v-show="!isActiveLightYellow"
       :duration="activeLightDuration"
-      @duration-end="setActiveLight(calcNextActiveLight())"
+      @duration-end="$emit('duration-end', calcNextActiveLight())"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { mapActions, mapState } from "vuex";
+import { defineComponent, PropType } from "vue";
 
 import TrafficSignalLight from "./TrafficSignalLight.vue";
 import TrafficSignalCounter from "./TrafficSignalCounter.vue";
+import { LightType } from "../utils/constants";
 
 export default defineComponent({
   name: "TrafficSignal",
+  props: {
+    activeLight: {
+      type: String as PropType<LightType>,
+      default: "red"
+    }
+  },
   data() {
     return {
       prevActiveLightIndex: 0,
       lights: [
-        { type: "red", duration: 3000 },
-        { type: "yellow", duration: 1000 },
-        { type: "green", duration: 5000 }
+        { type: "red", duration: 10000 },
+        { type: "yellow", duration: 3000 },
+        { type: "green", duration: 15000 }
       ]
     };
   },
@@ -47,8 +53,7 @@ export default defineComponent({
     },
     isActiveLightYellow(): boolean {
       return this.activeLight === "yellow";
-    },
-    ...mapState(["activeLight"])
+    }
   },
   methods: {
     checkIsLightActive(index: number) {
@@ -78,8 +83,7 @@ export default defineComponent({
       this.prevActiveLightIndex = this.activeLightIndex;
 
       return this.getNextActiveLightbyIndex(nextActiveLightIndex);
-    },
-    ...mapActions(["setActiveLight"])
+    }
   },
   components: {
     TrafficSignalLight,
