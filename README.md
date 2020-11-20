@@ -1,9 +1,13 @@
 # traffic-signal-app
 Эмулятор светофора, работающий через роутинг.
 
-[Demo-page](https://traffic-signal-app.vercel.app)
+[Демо-страница](https://traffic-signal-app.vercel.app)
 
-Дизайн приложения взят из Josh Werner's [Traffic Light codepen](https://codepen.io/jshwrnr/pen/jOqdvjr), с указанием [копирайта](./_miscellaneous/traffic_light_copyright.txt).
+[Требования](./_miscellaneous/requirements.pdf)
+
+Дизайн приложения был взят из Josh Werner's [Traffic Light codepen](https://codepen.io/jshwrnr/pen/jOqdvjr), с указанием [копирайта](./_miscellaneous/traffic_light_copyright.txt).
+
+Проект был выполнен в рамках тестового задания [компании TrueConf](https://trueconf.ru/).
 
 ## Быстрый старт
 Для клонирования репозитория, используйте следующие команды:
@@ -26,4 +30,4 @@ npm run start
 npm run build
 ```
 
-Страница доступна по адресу http://localhost:8080/.
+Страница будет доступна по адресу http://localhost:8080/.
