@@ -8,7 +8,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 
-import { DEFAULT_LIGHT_TYPE, LightType } from "../utils/constants";
+import { DEFAULT_LIGHT_TYPE, LightType, LightTypes } from "../utils/constants";
 
 export default defineComponent({
   name: "TrafficSignalLight",
@@ -24,7 +24,9 @@ export default defineComponent({
   },
   computed: {
     typeClass(): string {
-      return `traffic-signal__light_${this.type}`;
+      return this.type === LightTypes.RED
+        ? ""
+        : `traffic-signal__light_${this.type}`;
     }
   }
 });
@@ -51,9 +53,6 @@ export default defineComponent({
 
 .traffic-signal__light_active {
   opacity: 1;
-}
-
-.traffic-signal__light_active.traffic-signal__light_red {
   box-shadow: 0 0 40px #f00;
 }
 
