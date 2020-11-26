@@ -41,6 +41,8 @@ export default defineComponent({
   opacity: 0.15;
   background-color: #f00;
   border-radius: 50%;
+
+  transition: opacity 0.3s ease-out;
 }
 
 .traffic-signal__light_yellow {

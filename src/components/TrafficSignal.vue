@@ -39,9 +39,9 @@ export default defineComponent({
       prevActiveLightIndex: 0,
       LightTypes,
       lights: [
-        { type: LightTypes.RED, duration: 10000 },
-        { type: LightTypes.YELLOW, duration: 3000 },
-        { type: LightTypes.GREEN, duration: 15000 }
+        { type: LightTypes.RED, duration: 5000 },
+        { type: LightTypes.YELLOW, duration: 1000 },
+        { type: LightTypes.GREEN, duration: 3000 }
       ]
     };
   },
